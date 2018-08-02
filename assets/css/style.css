@@ -1,3 +1,11 @@
 /* Andrew Ton
    Assignment 3 - Psychic Game
    style.css */
+
+body {
+    background-color: lightblue;
+}
+
+#title {
+    background-color: lightyellow;
+}

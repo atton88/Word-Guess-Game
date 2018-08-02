@@ -25,17 +25,59 @@
         </div>
 
     <!-- Body text -->
-    <div id="scorebox" class="container rounded">
-            <p>Wins: <span id="winsCounter" class="font-weight-bold">0</span></p>
-            <p>Losses: <span id="lossesCounter" class="font-weight-bold">0</span></p>     
-            <hr>
-            <p>Current Mystery Pokemon:
-            <p><span id="pokemon"></span></p>
-            </p>
-            <hr>
-            <p>Guesses Left: <span id="guessesCounter" class="font-weight-bold">6</span></p>
-            <p>Guesses So Far: <span id="keyCounter" class="font-weight-bold">None</span></p>
+    <div id="scorebox" class="container">
+        <div class="row">
+
+            <div class="col-md-4 border rounded">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-center">Wins: <span id="winsCounter" class="font-weight-bold">0</span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-center">Losses: <span id="lossesCounter" class="font-weight-bold">0</span></p>     
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 border rounded">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-center">Current Mystery Pokemon: </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-center"><span id="pokemon" class="font-weight-bold"></span></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 rounded border">
+                <div class="row">
+                    <div class="col-md-12">
+                            <p class="text-center">Guesses Left: <span id="guessesCounter" class="font-weight-bold">7</span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-center">Guesses So Far: <span id="keyCounter" class="font-weight-bold">None</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <img id="image" src="assets/images/pokemon/ditto.png" alt="mysterymon" width=100%>
+
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
 
 
 

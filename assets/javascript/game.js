@@ -2,7 +2,15 @@
 // Assignment 3 - Word Guess Game
 // game.js
 
-// Declare Variables
+//TO DO
+//styling
+// loss scenario
+// add more poke
+// pics
+
+//-------------------//
+// Declare Variables //
+//-------------------//
 var wins = 0;
 var losses = 0;
 var guesses = 7;
@@ -22,8 +30,32 @@ var pokemonText = document.getElementById("pokemon");
 var pokeList = [
     "PIKACHU",
     "BULBASAUR",
-    "ZAPDOS"
+    "ZAPDOS",
+    "ARTICUNO",
+    "BLASTOISE",
+    "CHARIZARD",
+    "CHARMANDER",
+    "CHIKORITA",
+    "CYNDAQUILL",
+    "EEVEE",
+    "GENGAR",
+    "HAUNTER",
+    "LAPRAS",
+    "MARILL",
+    "MUDKIP",
+    "PSYDUCK",
+    "SANDSHREW",
+    "SANDSLASH",
+    "SNORLAX",
+    "TORCHIC",
+    "TOTODILE",
+    "VULPIX"
 ]
+
+
+//-----------//
+// Functions //
+//-----------//
 
 // Picks and returns random Pokemon from Pokelist, creates mystery blanks
 function pickPokemon() {
@@ -32,12 +64,20 @@ function pickPokemon() {
     for (i = 0; i < randPoke.length; i++) {
         blanks.push("__ ");
     }
-    document.querySelector("#pokemon").innerHTML = blanks;
+
+    var blankLetters = "";
+    for (j = 0; j < blanks.length; j++) {
+        blankLetters += blanks[j];
+    }
+
+    var strBlanks = convertString(blanks);
+
+    document.querySelector("#pokemon").innerHTML = strBlanks;
     return randPoke;
 };
 
 // checks if user guess is letter or duplicate guess
-function isLetter(key) {
+function isLetter(key) { 
     if (alphabet.includes(key)) {
 
         //check for duplicate letters
@@ -46,51 +86,65 @@ function isLetter(key) {
         }
     }
     return false;
+};
+
+function convertString (arr) {
+    var str = "";
+    for (i = 0; i < arr.length; i++) {
+        str += arr[i];
+    }
+    return str;
 }
 
-
-
-// Reset game and update stats
+// Reset game and updates stats
 function resetGame() {
     keysGuessed = [];
     guesses = 7;
     pickPokemon();
     document.querySelector("#winsCounter").innerHTML = wins;
-
     document.querySelector("#lossesCounter").innerHTML = losses;
-
     document.querySelector("#guessesCounter").innerHTML = guesses;
-
     document.querySelector("#keyCounter").innerHTML = "None";
-
-
 };
 
 // Play the game
 function play(key) {
-    
-    for (i = 0; i < randPoke.length; i++) {
 
-        // if key is found in randomPoke, remove the letter from array, and fill the letter in blanks
+    // if guess is not correct, reduce and update guesses
+    if (!randPoke.includes(key)) {
+        guesses--;
+        document.querySelector("#guessesCounter").innerHTML = guesses;
+    }
+
+    // if key is found in randomPoke, remove the letter from array, and fill the letter in blanks
+    for (i = 0; i < randPoke.length; i++) {
         if (key === randPoke[i]) {
             randPoke[i] = 0;
             blanks[i] = key;
-            console.log(blanks);
-            document.querySelector("#pokemon").innerHTML = blanks; //update blank
+            console.log(blanks); //test
         }
-
     }
+
+    strBlanks = convertString(blanks);
+    document.querySelector("#pokemon").innerHTML = strBlanks; //update blank
+
+    // Updates letters that have been guessed
     keysGuessed.push(key);
     document.querySelector("#keyCounter").innerHTML = keysGuessed;
 
-
+    // Win condition, updates wins
     if (!blanks.includes("__ ")) {
         wins++;
-        alert("win"); //test
+        // alert("win"); //test
         resetGame();
     }
 
-
+    // Lose condition, updates losses
+    if (guesses == 0) {
+        losses++;
+        // alert("lose"); //test
+        resetGame();
+    }
 };
 
 
@@ -105,18 +159,10 @@ function play(key) {
 randPoke = pickPokemon();
 console.log(randPoke); //test
 
-
 // When the user presses a key, it will run the following function...
 document.onkeyup = function(event) {
     var key = event.key.toUpperCase();
     if (isLetter(key)) {
-
         play(key);
-
-
-
-
-
     }
-
 }
