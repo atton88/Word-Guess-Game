@@ -103,7 +103,7 @@ function convertString (arr) {
 function resetGame() {
 
     //change image
-    document.getElementById("pokepic").src = "assets/images/pokemon/" + newPoke + ".png";
+    document.getElementById("pokepic").src = "assets/images/pokemon/" + newPoke.toLowerCase() + ".png";
 
     keysGuessed = [];
     guesses = 7;
