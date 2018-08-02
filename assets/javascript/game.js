@@ -18,6 +18,7 @@ var keysGuessed = [];
 var randPoke = [];
 var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var blanks = [];
+var newPoke;
 
 // To update text on page
 var winsText = document.getElementById("winsCounter");
@@ -57,9 +58,10 @@ var pokeList = [
 // Functions //
 //-----------//
 
-// Picks and returns random Pokemon from Pokelist, creates mystery blanks
+// Picks and returns random Pokemon from Pokelist, creates mystery blanks, newPoke is to track current pokemon for image
 function pickPokemon() {
-    randPoke = pokeList[Math.floor(Math.random() * pokeList.length)].split("");
+    newPoke = pokeList[Math.floor(Math.random() * pokeList.length)];
+    randPoke = newPoke.split("");
     blanks = [];
     for (i = 0; i < randPoke.length; i++) {
         blanks.push("__ ");
@@ -73,6 +75,7 @@ function pickPokemon() {
     var strBlanks = convertString(blanks);
 
     document.querySelector("#pokemon").innerHTML = strBlanks;
+    console.log(convertString(randPoke));
     return randPoke;
 };
 
@@ -98,6 +101,10 @@ function convertString (arr) {
 
 // Reset game and updates stats
 function resetGame() {
+
+    //change image
+    document.getElementById("pokepic").src = "assets/images/pokemon/" + newPoke + ".png";
+
     keysGuessed = [];
     guesses = 7;
     pickPokemon();
@@ -105,6 +112,7 @@ function resetGame() {
     document.querySelector("#lossesCounter").innerHTML = losses;
     document.querySelector("#guessesCounter").innerHTML = guesses;
     document.querySelector("#keyCounter").innerHTML = "None";
+
 };
 
 // Play the game
@@ -121,7 +129,7 @@ function play(key) {
         if (key === randPoke[i]) {
             randPoke[i] = 0;
             blanks[i] = key;
-            console.log(blanks); //test
+            // console.log(blanks); //test
         }
     }
 
@@ -157,7 +165,6 @@ function play(key) {
 
 //initial pick
 randPoke = pickPokemon();
-console.log(randPoke); //test
 
 // When the user presses a key, it will run the following function...
 document.onkeyup = function(event) {
